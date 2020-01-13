@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>todoapp</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'todo/todo.css' %}">
+    <script src="{% static 'styles/bootstrap4/todo.js' %}"></script>
+
+</head>
+<body>
+<h1>TODO LIST</h1>
+<div class="content">
+{% for i in a %}
+<ul>
+    <li><i>{{i.name}} added </i>{{i.content}} on {{i.date}}</li>
+    <form class="first" action="/deletetodo/{{i.id}}/" method="post">
+    {% csrf_token %}
+    <input class="sub" type="submit" value="X">
+    </form>
+</ul>
+{% endfor %}
+</div>
+<form action="/addtodo/" name="todo" method="post" >
+    {% csrf_token %}
+    <div class="add">
+    <input type="text" name="content" placeholder="Text..." id="c" class="text" required><br>
+        <input type="text" name="name" class="text" id="n" placeholder="enter your name...." required>
+    <input class="sub1" type="submit"  value="add">
+    </div>
+</form>
+</body>
+</html>
